@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <header class="flex justify-between px-16 py-4 bg-gray-900 text-white">
+      <div class="text-2xl">OurApp</div>
+      <div>
+        <input type="text" class="border rounded" placeholder="Username" />
+        <input type="password" class="border rounded" placeholder="Password" />
+        <button class="bg-blue-600 rounded px-2 py-px">Login</button>
+      </div>
+    </header>
+    <main class="flex p-32 gap-32">
+      <div class="flex flex-col gap-4">
+        <h1 class="text-6xl font-thin">Remember Writing?</h1>
+        <p class="text-gray-400">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit
+          nostrum commodi dolor accusamus autem. Sunt similique maiores nihil
+          eaque repellat voluptatem itaque eveniet odio sapiente tempore in
+          deserunt, temporibus delectus reprehenderit labore earum aspernatur
+          cupiditate incidunt veritatis ut. Commodi assumenda blanditiis saepe
+          maiores corrupti at ea sunt, ipsum fugit voluptatibus.
+        </p>
+      </div>
+      <form class="flex flex-col gap-4">
+        <input
+          type="text"
+          class="border rounded px-2 w-72"
+          placeholder="Username"
+        />
+        <input
+          type="password"
+          class="border rounded px-2"
+          placeholder="Password"
+        />
+        <input type="email" class="border rounded px-2" placeholder="Email" />
+        <button class="text-white block bg-green-600 rounded px-2 py-2">
+          Signup
+        </button>
+      </form>
+    </main>
+    <hr />
+    <footer class="mt-1 text-sm text-gray-500 text-center">
+      Copyright © 2023 OurApp. All rights reserved.
+    </footer>
+  </body>
+</html>
