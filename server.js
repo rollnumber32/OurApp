@@ -1,11 +1,12 @@
+const db = require("./db");
 const express = require("express");
 const app = express();
 const path = require("path");
-
 app.set("view engine", "ejs");
 
 app.get("/profile", (req, res) => {
   res.render(path.join(__dirname, "/views/profile.ejs"));
+  db.connectToServer(() => console.log("Hola!"));
 });
 
 app.get("/profile-followers", (req, res) => {
