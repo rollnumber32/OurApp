@@ -1,14 +1,21 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 
-PORT = 3000;
+app.set("view engine", "ejs");
 
-const app = express();
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/views/profile.html"));
+app.get("/profile", (req, res) => {
+  res.render(path.join(__dirname, "/views/profile.ejs"));
 });
 
-app.listen(PORT, () => {
+app.get("/profile-followers", (req, res) => {
+  res.render(path.join(__dirname, "/views/profile-followers.ejs"));
+});
+
+app.get("/profile-following", (req, res) => {
+  res.render(path.join(__dirname, "/views/profile-following.ejs"));
+});
+
+app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
