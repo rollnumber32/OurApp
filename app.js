@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
-const path = require("path");
 const router = require("./router");
+var session = require("express-session");
+
 app.set("view engine", "ejs");
+
+app.use(session({ secret: "Mamma-Mia" }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+module.exports = app;
