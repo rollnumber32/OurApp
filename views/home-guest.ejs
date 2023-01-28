@@ -35,19 +35,29 @@
           maiores corrupti at ea sunt, ipsum fugit voluptatibus.
         </p>
       </div>
-      <form class="flex flex-col gap-4">
+      <form class="flex flex-col gap-4" action="/api/users" method="post">
         <input
           type="text"
+          name="username"
           class="border rounded px-2 w-72"
           placeholder="Username"
         />
         <input
           type="password"
+          name="password"
           class="border rounded px-2"
           placeholder="Password"
         />
-        <input type="email" class="border rounded px-2" placeholder="Email" />
-        <button class="text-white block bg-green-600 rounded px-2 py-2">
+        <input
+          type="email"
+          name="email"
+          class="border rounded px-2"
+          placeholder="Email"
+        />
+        <button
+          type="submit"
+          class="text-white block bg-green-600 rounded px-2 py-2"
+        >
           Signup
         </button>
       </form>

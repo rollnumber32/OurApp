@@ -1,28 +1,13 @@
 require("dotenv").config();
-const { MongoClient } = require("mongodb");
-const connectionString = process.env.URI;
-const client = new MongoClient(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const mongoose = require("mongoose");
 
-let dbConnection;
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.URI, { useNewURLParser: true });
 
-module.exports = {
-  connectToServer: function (callback) {
-    client.connect(function (err, db) {
-      if (err || !db) {
-        return callback(err);
-      }
-
-      dbConnection = db.db("sample_airbnb");
-      console.log("Successfully connected to MongoDB.");
-
-      return callback();
-    });
-  },
-
-  getDb: function () {
-    return dbConnection;
-  },
-};
+mongoose.connection
+  .once("open", function () {
+    console.log("Database connected Successfully");
+  })
+  .on("error", function (err) {
+    console.log("Error", err);
+  });
