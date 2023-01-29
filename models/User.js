@@ -18,13 +18,19 @@ let User = function (data, avatarNeeded) {
   if (avatarNeeded) this.generateAvatar();
 };
 
-User.prototype.cleanUp = () => {
+User.prototype.cleanUp = function () {
   if (typeof this.data.username != "string") this.data.username = "";
   if (typeof this.data.email != "string") this.data.email = "";
   if (typeof this.data.password != "string") this.data.password = "";
+
+  this.data = {
+    username: this.data.username.trim().toLowerCase(),
+    email: this.data.email.trim().toLowerCase(),
+    password: this.data.password,
+  };
 };
 
-User.prototype.validate = () => {
+User.prototype.validate = function () {
   return new Promise(async (resolve, reject) => {
     if (this.data.username == "")
       this.errors.push("You must provide a valid username.");
@@ -51,27 +57,33 @@ User.prototype.validate = () => {
   });
 };
 
-User.prototype.login = () => {
-  return new Promise((resolve, reject) => {
-    UserModel.findOne({ username: this.data.username }, (user) => {
-      if (user && bcrypt.compareSync(this.data.password, user.password)) {
-        this.generateAvatar();
-        resolve();
-      } else {
-        reject("Username or Password incorrect.");
-      }
-    }).catch(() => reject("Username or Password incorrect."));
+User.prototype.login = function () {
+  return new Promise(async (resolve, reject) => {
+    const user = await UserModel.findOne({ username: this.data.username });
+    if (user && bcrypt.compareSync(this.data.password, user.password)) {
+      this.data = {
+        username: this.username,
+        email: user.email,
+        password: this.password,
+      };
+      this.generateAvatar();
+      resolve();
+    } else {
+      reject("Username or Password incorrect.");
+    }
   });
 };
 
-User.prototype.register = () => {
+User.prototype.register = function () {
   return new Promise(async (resolve, reject) => {
+    this.cleanUp();
     await this.validate();
 
     if (this.errors.length == 0) {
       let salt = bcrypt.genSaltSync(10);
       this.data.password = bcrypt.hashSync(this.data.password, salt);
-      const user = new UserModel(this.data).save();
+      const user = new UserModel(this.data);
+      user.save();
       this.generateAvatar();
       resolve();
     } else {
@@ -80,7 +92,7 @@ User.prototype.register = () => {
   });
 };
 
-User.prototype.generateAvatar = () => {
+User.prototype.generateAvatar = function () {
   this.avatar = `https://gravatar.com/avatar/${md5(this.data.email)}?s=128`;
 };
 
