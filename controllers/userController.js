@@ -16,13 +16,17 @@ exports.login = (req, res) => {
       req.session.user = {
         _id: user.data._id,
         username: user.data.username,
-        avatar: user.data.avatar,
+        avatar: user.avatar,
       };
-      req.session.save(() => res.redirect("/"));
+      req.session.save(() => {
+        res.redirect("/");
+      });
     })
     .catch((e) => {
       req.flash("errors", e);
-      req.session.save(() => res.redirect("/"));
+      req.session.save(() => {
+        res.redirect("/");
+      });
     });
 };
 
@@ -37,5 +41,15 @@ exports.signup = (req, res) => {
 };
 
 exports.signout = (req, res) => {
-  req.session.destroy(() => res.redirect("/"));
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+};
+
+exports.mustBeLoggedIn = (req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect("/");
+  }
 };

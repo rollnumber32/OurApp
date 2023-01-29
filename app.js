@@ -3,7 +3,6 @@ const app = express();
 const router = require("./router");
 var session = require("express-session");
 var flash = require("connect-flash");
-const MongoStore = require("connect-mongo");
 
 app.set("view engine", "ejs");
 

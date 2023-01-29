@@ -2,11 +2,25 @@
 
 <main>
   <div class="px-96 py-16">
-    <div class="text-4xl">hello everybody</div>
-    <div class="text-gray-500 text-sm mb-6">
-      Posted by <span class="text-blue-500">user</span> on 21/01/2023
+    <div>
+      <div class="text-4xl"><%= post.title %></div>
+      <% if(post.isVisitorOwner){%>
+      <div>
+        <a href="./<%= post._id %>/edit">Edit</a>
+        <a href="./<%= post._id %>/delete">Delete</a>
+      </div>
+      <% }%>
     </div>
-    <div class="text-gray-600">Lorem ipsum dolor sit amet.</div>
+    <div class="text-gray-500 text-sm mb-6">
+      <img
+        class="h-6 rounded-full inline-block"
+        src="<%= post.author.avatar %>"
+      />
+      Posted by
+      <span class="text-blue-500"><%= post.author.username %></span>
+      on <%= post.createdAt.toDateString() %>
+    </div>
+    <div class="text-gray-600"><%= post.body %></div>
   </div>
 </main>
 

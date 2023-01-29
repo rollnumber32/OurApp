@@ -1,5 +1,13 @@
-const mongoose = require("mongoose");
+const { UserModel, FollowModel } = require("../db");
 
-const followSchema = new mongoose.Schema({});
+let Follow = function (followedUsername, authorId) {
+  this.followedUsername = followedUsername;
+  this.authorId = authorId;
+  this.errors = [];
+};
 
-module.exports = mongoose.model("Follow", followSchema);
+Follow.cleanUp = function () {
+  if (typeof this.followedUsername != "string") this.followedUsername = "";
+};
+
+Follow.validate = async function (action) {};

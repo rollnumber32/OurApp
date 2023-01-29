@@ -1,15 +1,7 @@
-const mongoose = require("mongoose");
+const UserModel = require("../db").UserModel;
 const bcrypt = require("bcryptjs");
 const md5 = require("md5");
 const validator = require("validator");
-
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
-
-const UserModel = mongoose.model("User", userSchema);
 
 let User = function (data, avatarNeeded) {
   this.data = data;
@@ -19,6 +11,7 @@ let User = function (data, avatarNeeded) {
 };
 
 User.prototype.cleanUp = function () {
+  console.log(UserModel);
   if (typeof this.data.username != "string") this.data.username = "";
   if (typeof this.data.email != "string") this.data.email = "";
   if (typeof this.data.password != "string") this.data.password = "";
@@ -62,7 +55,8 @@ User.prototype.login = function () {
     const user = await UserModel.findOne({ username: this.data.username });
     if (user && bcrypt.compareSync(this.data.password, user.password)) {
       this.data = {
-        username: this.username,
+        _id: user._id,
+        username: user.username,
         email: user.email,
         password: this.password,
       };
