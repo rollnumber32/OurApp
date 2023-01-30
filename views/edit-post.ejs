@@ -1,0 +1,24 @@
+<%- include("includes/header.ejs") %>
+<main>
+  <form
+    class="flex flex-col py-16 px-72 gap-2"
+    action="/post/<%= post._id%>/edit"
+    method="post"
+  >
+    <label>Title</label>
+    <input
+      value="<%= post.title %>"
+      class="border rounded px-2 py-2"
+      type="text"
+      name="title"
+    />
+    <label>Body Content</label>
+    <textarea name="body" class="border rounded h-96 px-2 py-2">
+<%= post.body %></textarea
+    >
+    <button type="submit" class="text-white w-32 bg-blue-600 rounded px-2 py-2">
+      Save New Post
+    </button>
+  </form>
+</main>
+<%- include("includes/footer.ejs") %>

@@ -2,10 +2,10 @@
 
 <main>
   <div class="px-96 py-16">
-    <div>
+    <div class="flex justify-between">
       <div class="text-4xl"><%= post.title %></div>
       <% if(post.isVisitorOwner){%>
-      <div>
+      <div class="flex gap-4 py-2">
         <a href="./<%= post._id %>/edit">Edit</a>
         <a href="./<%= post._id %>/delete">Delete</a>
       </div>

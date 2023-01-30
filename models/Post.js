@@ -41,7 +41,7 @@ Post.prototype.create = function () {
   });
 };
 
-Post.update = function () {
+Post.prototype.update = function () {
   return new Promise(async (resolve, reject) => {
     try {
       const post = await Post.findSingleById(this.requestedPostId, this.userid);
@@ -57,12 +57,12 @@ Post.update = function () {
   });
 };
 
-Post.actuallyUpdate = function () {
-  return new Promise((resolve, reject) => {
+Post.prototype.actuallyUpdate = function () {
+  return new Promise(async (resolve, reject) => {
     this.cleanUp();
     this.validate();
     if (this.errors.length == 0) {
-      PostModel.findOneAndUpdate(
+      await PostModel.findOneAndUpdate(
         { _id: new ObjectId(this.requestedPostId) },
         { $set: { title: this.data.title, body: this.data.body } }
       );
@@ -170,7 +170,7 @@ Post.countPostByAuthor = function (id) {
 Post.getFeed = async function (id) {
   const followedUsers = await FollowModel.find({
     authorId: new ObjectId(id),
-  }).toArray();
+  });
 
   followedUsers.map((followDoc) => {
     return followDoc.followedId;
@@ -178,7 +178,7 @@ Post.getFeed = async function (id) {
 
   return Post.reusablePostQuery([
     { $match: { authorId: { $in: followedUsers } } },
-    { $sort: { $createdAt: -1 } },
+    { $sort: { createdAt: -1 } },
   ]);
 };
 

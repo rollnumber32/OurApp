@@ -1,8 +1,10 @@
+const Post = require("../models/Post");
 const User = require("../models/User");
 
-exports.home = (req, res) => {
+exports.home = async (req, res) => {
   if (req.session.user) {
-    res.render("home-dashboard");
+    const posts = await Post.getFeed(req.session.user._id);
+    res.render("home-dashboard", { posts: posts });
   } else {
     res.render("home-guest");
   }
