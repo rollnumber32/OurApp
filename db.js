@@ -21,7 +21,10 @@ const postSchema = new mongoose.Schema({
 
 const PostModel = mongoose.model("Post", postSchema);
 
-const followSchema = new mongoose.Schema({});
+const followSchema = new mongoose.Schema({
+  followedId: { type: mongoose.Types.ObjectId, required: true },
+  authorId: { type: mongoose.Types.ObjectId, required: true },
+});
 
 const FollowModel = mongoose.model("Follow", followSchema);
 

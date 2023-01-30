@@ -115,4 +115,29 @@ User.prototype.doesEmailExist = (email) => {
   });
 };
 
+User.findByUsername = (username) => {
+  return new Promise((resolve, reject) => {
+    if (typeof username != "string") {
+      reject();
+    }
+    UserModel.findOne({ username: username })
+      .then((userDoc) => {
+        if (userDoc) {
+          userDoc = new User(userDoc, true);
+          userDoc = {
+            _id: userDoc.data._id,
+            username: userDoc.data.username,
+            avatar: userDoc.avatar,
+          };
+          resolve(userDoc);
+        } else {
+          reject();
+        }
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+};
+
 module.exports = User;

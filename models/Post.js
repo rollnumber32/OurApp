@@ -160,7 +160,14 @@ Post.search = function (searchTerm) {
   });
 };
 
-Post.countPostByAuthor = function (id) {
+Post.findByAuthorId = (id) => {
+  return Post.reusablePostQuery([
+    { $match: { authorId: id } },
+    { $sort: { createdAt: -1 } },
+  ]);
+};
+
+Post.countPostByAuthor = (id) => {
   return new Promise(async (resolve, reject) => {
     const postCount = await PostModel.countDocuments({ authorId: id });
     resolve(postCount);
