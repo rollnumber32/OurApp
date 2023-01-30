@@ -1,9 +1,15 @@
 <%- include("includes/header.ejs") %>
 
 <main>
-  <%= posts %>
+  <%- include("includes/flash") %>
+  <% if(posts.length != 0){ %>
+    <div class="flex flex-col gap-2 py-10 px-96"><h1 class="text-2xl font-bold">Feed</h1><% posts.forEach((post) => {%><a class="border hover:bg-gray-100 rounded p-2" href="/post/<%= post._id %>"><strong><%=post.title %></strong> by <%= post.author.username%></a><% });%></div>
+    <% } else{%>
+  <div>
   <div class="flex flex-col items-center text-center px-96 py-16">
-    <div class="text-3xl">Hello <strong>user</strong>, your feed is empty.</div>
+    <div class="text-3xl">
+      Hello <strong><%= user.username %></strong>, your feed is empty.
+    </div>
     <p class="text-gray-500">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore,
       excepturi nesciunt, rerum aut accusantium repellat numquam voluptas
@@ -11,6 +17,7 @@
       maiores tenetur accusantium quaerat?
     </p>
   </div>
+  <%} %>
 </main>
 
 <%- include("includes/footer.ejs") %>

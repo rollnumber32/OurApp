@@ -1,5 +1,6 @@
-<%- include("includes/header.ejs") %>
+<%- include("includes/header") %>
 <main>
+  <%- include("includes/flash") %>
   <form
     class="flex flex-col py-16 px-72 gap-2"
     action="/create-post"
@@ -14,4 +15,4 @@
     </button>
   </form>
 </main>
-<%- include("includes/footer.ejs") %>
+<%- include("includes/footer") %>

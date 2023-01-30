@@ -1,6 +1,7 @@
 <%- include("includes/header.ejs") %>
 
 <main>
+  <%- include("includes/flash") %>
   <div class="px-96 py-16">
     <div class="flex justify-between">
       <div class="text-4xl"><%= post.title %></div>
@@ -17,7 +18,9 @@
         src="<%= post.author.avatar %>"
       />
       Posted by
-      <span class="text-blue-500"><%= post.author.username %></span>
+      <a href="/profile/<%= post.author.username%>" class="text-blue-500"
+        ><%= post.author.username %></a
+      >
       on <%= post.createdAt.toDateString() %>
     </div>
     <div class="text-gray-600"><%= post.body %></div>

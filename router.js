@@ -61,4 +61,16 @@ router.get(
 );
 router.post("/search", post_controller.search);
 
+//follow
+router.get(
+  "/addFollow/:username",
+  user_controller.mustBeLoggedIn,
+  follow_controller.addFollow
+);
+router.get(
+  "/removeFollow/:username",
+  user_controller.mustBeLoggedIn,
+  follow_controller.removeFollow
+);
+
 module.exports = router;

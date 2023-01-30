@@ -63,7 +63,7 @@ Follow.prototype.delete = function () {
     this.cleanUp();
     await this.validate("delete");
     if (this.errors == 0) {
-      FollowModel.deleteOne({
+      await FollowModel.deleteOne({
         followedId: this.followId,
         authorId: new ObjectId(this.authorId),
       });
@@ -125,7 +125,7 @@ Follow.getFollowingById = (id) => {
         {
           $lookup: {
             from: "users",
-            localField: "authorId",
+            localField: "followedId",
             foreignField: "_id",
             as: "userDoc",
           },

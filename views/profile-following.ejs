@@ -1,24 +1,15 @@
 <%- include("includes/header.ejs") %>
 <main>
+  <%- include("includes/flash") %>
   <div class="px-96 py-16">
-    <div class="text-4xl mb-4"><%= profileUsername %></div>
-    <div class="flex gap-2 text-blue-400">
-      <a href="/profile/<%= profileUsername%>" class="px-2 py-1"
-        >Posts: <%= counts.postCount%></a
-      >
-      <a href="/profile/<%= profileUsername%>/followers" class="px-2 py-1"
-        >Followers: <%= counts.followerCount%></a
-      >
-      <a
-        href="/profile/<%= profileUsername%>/following"
-        class="border px-2 py-1"
-        >Following: <%= counts.followingCount%></a
-      >
-    </div>
-    <% following.forEach((follow) => {%>
-    <div class="border rounded px-3 py-2 my-4 hover:bg-gray-100 cursor-pointer">
+    <%- include("includes/sharedProfile") %> <% following.forEach((follow) =>
+    {%>
+    <a
+      href="/profile/<%= follow.username %>"
+      class="border block rounded px-3 py-2 my-4 hover:bg-gray-100 cursor-pointer"
+    >
       <span class="font-semibold"><%= follow.username %></span>
-    </div>
+    </a>
     <% }); %>
   </div>
 </main>

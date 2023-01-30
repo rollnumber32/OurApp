@@ -1,5 +1,7 @@
 <% errors.forEach((message) => { %>
-<div><%= message %></div>
+<div class="w-full bg-red-300 border-b-2 border-gray-900 text-center py-2">
+  <%= message %>
+</div>
 <% }) %> <% success.forEach(function(message){ %>
-<div><%= message %></div>
+<div class="w-full bg-green-300 text-center py-2"><%= message %></div>
 <% }) %>

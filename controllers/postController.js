@@ -12,7 +12,6 @@ exports.viewSingle = async (req, res) => {
     );
     res.render("single-post-screen", { post: post });
   } catch (e) {
-    console.log(e);
     res.render("404");
   }
 };
@@ -35,7 +34,6 @@ exports.viewEditScreen = async (req, res) => {
 
 exports.create = (req, res) => {
   const post = new Post(req.body, req.session.user._id);
-  console.log(req.session.user);
   post
     .create()
     .then((newId) => {

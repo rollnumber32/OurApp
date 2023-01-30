@@ -23,7 +23,7 @@ exports.addFollow = (req, res) => {
 exports.removeFollow = (req, res) => {
   const follow = new Follow(req.params.username, req.session.user._id);
   follow
-    .delte()
+    .delete()
     .then(() => {
       req.flash("success", `Successfully unfollowed ${req.params.username}`);
       req.session.save(() => {

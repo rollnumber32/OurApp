@@ -1,0 +1,26 @@
+<div class="flex">
+  <div>
+    <img class="rounded-full h-16" src="<%= profileAvatar %>" />
+    <div class="text-4xl mb-4"><%= profileUsername %></div>
+  </div>
+  <% if(profileUsername != user.username) {%>
+  <div class="m-6 bg-blue-600 text-white h-6 rounded">
+    <% if(!isFollowing) { %><a class="p-4" href="/addfollow/<%= profileUsername %>"
+      >Follow</a
+    >
+    <% } else {%><a class="p-4" href="/removefollow/<%= profileUsername %>">Unfollow</a><% }
+    %>
+  </div>
+  <% } %>
+</div>
+<div class="flex gap-2 text-blue-400">
+  <a href="/profile/<%= profileUsername%>" class="px-2 py-1 <%= currentPage == "posts" ? "border" : "" %>"
+    >Posts: <%= counts.postCount%></a
+  >
+  <a href="/profile/<%= profileUsername%>/followers" class="px-2 py-1 <%= currentPage == "followers" ? "border" : "" %>"
+    >Followers: <%= counts.followerCount%></a
+  >
+  <a href="/profile/<%= profileUsername%>/following" class="px-2 py-1 <%= currentPage == "following" ? "border" : "" %>"
+    >Following: <%= counts.followingCount%></a
+  >
+</div>

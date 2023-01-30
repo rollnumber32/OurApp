@@ -175,11 +175,11 @@ Post.countPostByAuthor = (id) => {
 };
 
 Post.getFeed = async function (id) {
-  const followedUsers = await FollowModel.find({
+  let followedUsers = await FollowModel.find({
     authorId: new ObjectId(id),
   });
 
-  followedUsers.map((followDoc) => {
+  followedUsers = followedUsers.map((followDoc) => {
     return followDoc.followedId;
   });
 
