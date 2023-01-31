@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon db.js",
+    "start": "nodemon db --ignore frontend-js --ignore public/",
+    "watch": "npx webpack watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

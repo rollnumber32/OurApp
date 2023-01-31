@@ -4,10 +4,14 @@ const router = require("./router");
 var session = require("express-session");
 var flash = require("connect-flash");
 
+sessionOptions = session({ secret: "Mamma-Mia" });
+
+app.use(express.static("public"));
+app.set("views", "views");
 app.set("view engine", "ejs");
 
 app.use(flash());
-app.use(session({ secret: "Mamma-Mia" }));
+app.use(sessionOptions);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,4 +25,27 @@ app.use((req, res, next) => {
 
 app.use("/", router);
 
-module.exports = app;
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+io.use(function (socket, next) {
+  sessionOptions(socket.request, socket.request.res, next);
+});
+
+io.on("connection", function (socket) {
+  if (socket.request.session.user) {
+    let user = socket.request.session.user;
+
+    socket.emit("welcome", { username: user.username, avatar: user.avatar });
+
+    socket.on("chatMessageFromBrowser", function (data) {
+      socket.broadcast.emit("chatMessageFromServer", {
+        message: data.message,
+        username: user.username,
+        avatar: user.avatar,
+      });
+    });
+  }
+});
+
+module.exports = server;

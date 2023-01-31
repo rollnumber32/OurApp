@@ -2,5 +2,10 @@
 <footer class="mt-1 text-sm text-gray-500 text-center">
   Copyright &copy 2023 OurApp. All rights reserved.
 </footer>
+<% if(user) { %>
+  <div id="chat-wrapper" class="flex flex-col absolute w-96 h-96 bottom-0 right-8 invisible border shadow"></div>
+  <script src="/socket.io/socket.io.js"></script>
+<% } %>
+<script src="/main-bundled.js"></script>
 </body>
 </html>
