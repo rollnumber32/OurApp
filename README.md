@@ -2,6 +2,14 @@
 
 **Technologies used:** express, ejs, sessions, mvc technique, csrf token, mongodb, socket.io.
 
+Steps to create db URI:
+
+1. Create an account on mongodb atlas
+2. Create a cluster
+3. Get your auth uri from project
+4. Create a .env file in root directory
+5. Paste you uri as URI="your-uri"
+
 If you want to run the app locally follow these steps:
 
 1. Open terminal
