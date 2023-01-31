@@ -26,14 +26,21 @@
           <a href="/create-post" class="bg-green-600 rounded px-2 py-1"
             >Create Post</a
           >
-          <a
-            href="/signout"
-            class="cursor-pointer bg-gray-600 rounded px-2 py-1"
-            >Sign Out</a
+          <form
+            action="/signout"
+            method="post"
+            class="inline-block cursor-pointer bg-gray-600 rounded px-2 py-1"
           >
+            <input
+              type="hidden"
+              name="_csrf"
+              value="<%= csrfToken %>"
+            /><button>Sign Out</button>
+          </form>
         </div>
         <% }else{%>
         <form class="text-black" action="/login" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input
             name="username"
             type="text"

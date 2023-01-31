@@ -6,6 +6,7 @@
     action="/post/<%= post._id%>/edit"
     method="post"
   >
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <label>Title</label>
     <input
       value="<%= post.title %>"

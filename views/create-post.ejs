@@ -6,6 +6,7 @@
     action="/create-post"
     method="post"
   >
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <label>Title</label>
     <input class="border rounded px-2 py-2" type="text" name="title" />
     <label>Body Content</label>

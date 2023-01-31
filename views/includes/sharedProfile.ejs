@@ -5,22 +5,28 @@
   </div>
   <% if(profileUsername != user.username) {%>
   <div class="m-6 bg-blue-600 text-white h-6 rounded">
-    <% if(!isFollowing) { %><a class="p-4" href="/addfollow/<%= profileUsername %>"
-      >Follow</a
-    >
-    <% } else {%><a class="p-4" href="/removefollow/<%= profileUsername %>">Unfollow</a><% }
+    <% if(!isFollowing) { %>
+      <form  action="/addfollow/<%= profileUsername %>" method="post">
+        <input
+        type="hidden"
+        name="_csrf"
+        value="<%= csrfToken %>"/>
+        <button class="px-2">Follow</button>
+      </form>
+    <% } else {%>
+      <form  action="/removefollow/<%= profileUsername %>" method="post">
+        <input
+        type="hidden"
+        name="_csrf"
+        value="<%= csrfToken %>"/>
+        <button class="px-2">Unfollow</button>
+      </form><% }
     %>
   </div>
   <% } %>
 </div>
 <div class="flex gap-2 text-blue-400">
-  <a href="/profile/<%= profileUsername%>" class="px-2 py-1 <%= currentPage == "posts" ? "border" : "" %>"
-    >Posts: <%= counts.postCount%></a
-  >
-  <a href="/profile/<%= profileUsername%>/followers" class="px-2 py-1 <%= currentPage == "followers" ? "border" : "" %>"
-    >Followers: <%= counts.followerCount%></a
-  >
-  <a href="/profile/<%= profileUsername%>/following" class="px-2 py-1 <%= currentPage == "following" ? "border" : "" %>"
-    >Following: <%= counts.followingCount%></a
-  >
+  <a href="/profile/<%= profileUsername%>" class="px-2 py-1 <%= currentPage == "posts" ? "border" : "" %>">Posts: <%= counts.postCount%></a>
+  <a href="/profile/<%= profileUsername%>/followers" class="px-2 py-1 <%= currentPage == "followers" ? "border" : "" %>">Followers: <%= counts.followerCount%></a>
+  <a href="/profile/<%= profileUsername%>/following" class="px-2 py-1 <%= currentPage == "following" ? "border" : "" %>">Following: <%= counts.followingCount%></a>
 </div>

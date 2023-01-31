@@ -3,6 +3,7 @@ const app = express();
 const router = require("./router");
 var session = require("express-session");
 var flash = require("connect-flash");
+const csurf = require("csurf");
 
 sessionOptions = session({ secret: "Mamma-Mia" });
 
@@ -23,7 +24,26 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(csurf());
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
 app.use("/", router);
+
+app.use((err, req, res, next) => {
+  if (err) {
+    if (err.code == "EBADCSRFTOKEN") {
+      req.flash("errors", "Cross site request forgery detected.");
+      req.session.save(() => {
+        res.redirect("/");
+      });
+    } else {
+      res.render("404");
+    }
+  }
+});
 
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);

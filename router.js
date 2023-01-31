@@ -8,7 +8,7 @@ const follow_controller = require("./controllers/followController");
 
 //user
 router.get("/", user_controller.home);
-router.get("/signout", user_controller.signout);
+router.post("/signout", user_controller.signout);
 router.post("/login", user_controller.login);
 router.post("/signup", user_controller.signup);
 
@@ -62,12 +62,12 @@ router.get(
 router.post("/search", post_controller.search);
 
 //follow
-router.get(
+router.post(
   "/addFollow/:username",
   user_controller.mustBeLoggedIn,
   follow_controller.addFollow
 );
-router.get(
+router.post(
   "/removeFollow/:username",
   user_controller.mustBeLoggedIn,
   follow_controller.removeFollow
