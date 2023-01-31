@@ -16,13 +16,8 @@
         <a class="text-2xl" href="/">OurApp</a>
         <% if (user) { %>
         <div>
-          <span
-            class="mr-2 open-chat cursor-pointer"
-            title="Chat"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            >Chat
-          </span>
+          <span class="mr-2 cursor-pointer search">Search</span>
+          <span class="mr-2 open-chat cursor-pointer">Chat </span>
           <a href="/profile/<%= user.username%>"
             ><img
               class="mr-2 rounded-full h-6 inline-block"

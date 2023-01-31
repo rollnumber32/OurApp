@@ -148,12 +148,13 @@ Post.delete = function (postId, currentUserId) {
 };
 
 Post.search = function (searchTerm) {
-  return new Promise(async (resolve, rejetc) => {
+  return new Promise(async (resolve, reject) => {
     if (typeof searchTerm == "string") {
-      const posts = await Post.reusablePostQuery[
-        ({ $match: { $text: { $search: searchTerm } } },
-        { $sort: { $score: { $meta: "textScore" } } })
-      ];
+      const posts = await PostModel.aggregate([
+        { $match: { $text: { $search: searchTerm } } },
+        { $sort: { score: { $meta: "textScore" } } },
+      ]);
+      resolve(posts);
     } else {
       reject();
     }
