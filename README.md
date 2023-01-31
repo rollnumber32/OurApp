@@ -33,4 +33,4 @@ npm start
 
 ...and you'll have your server running on http://localhost:3000
 
-**Note:** You much have git, nodejs and npm installed for this to work properly.
+**Note:** You must have git, nodejs and npm installed for this to work properly.
